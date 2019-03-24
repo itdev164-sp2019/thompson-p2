@@ -1,5 +1,8 @@
 import React from 'react';
 
+const opening = <span style={{color:"blue"}}>
+const closing = </span>
+
 export const text1w = `import React from 'react'
 import {darken} from 'polished'
 import mastheadImage from './images/styled-components.png'
@@ -18,7 +21,7 @@ const breakpoints = [576,768, 900]
 
 const theme = {
   breakpoints: [...breakpoints],
-  ${<span style={{color:"blue"}}>space: [0, 4, 8, 16, 32, 64, 128, 256, 512],</span>}
+  ${opening}space: [0, 4, 8, 16, 32, 64, 128, 256, 512],${closing}
   lineHeights: {
     solid: 1,
     title: 1.25,
