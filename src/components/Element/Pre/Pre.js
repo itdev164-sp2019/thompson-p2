@@ -13,7 +13,7 @@ overflow-x: auto;
 background-color:#ebebeb;
 width:100px;
 width: 45%;
-max-height: 700px;
+max-height: 95vh;
 `
 
 // ${props => props.theme.variants.button[props.variant || 'primary']};
