@@ -14,8 +14,8 @@ const IndexPage = () => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
     <Section flex justifyContent="space-evenly" m={0}>
-    <pre contentEditable = "true"  spellcheck="false">test</pre>
-    <pre contentEditable = "true" spellcheck="false" >${text1w}</pre>
+    <pre contentEditable = "false"  spellcheck="false">{text1w}</pre>
+    <pre contentEditable = "true" spellcheck="false" ></pre>
     </Section>
     <IconButton variant="primary" icon={<CompareArrows />}  style={{margin:'0 auto',  display:'block'}}/>
     {/* <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
