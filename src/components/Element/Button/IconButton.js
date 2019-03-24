@@ -7,9 +7,12 @@ const StyledButton = styled(ButtonBase)`
     ${props => props.theme.variants.iconButton[props.variant || 'primary']};
     height: 60px;
     width: 200px;
-    border: 2px solid blueviolet;
+    margin-bottom: 20px;
+    border: 2px solid blue;
     border-radius: 30px;
-    &:hover {color: blueviolet;};
+    &:hover {
+        color: blueviolet;
+        border: 2px solid blueviolet;};
     `
 
     export const IconButton = styled(({icon, ...props}) => {
