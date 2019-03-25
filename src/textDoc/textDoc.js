@@ -1,10 +1,12 @@
 import React from 'react';
+import { Span } from '../components/Element/Span';
 
 const opening = <span style={{color:"blue"}}>
 const closing = </span>
 
-export const text1w = `import React from 'react'
+export const codeAssignment1 = <>{`import React from 'react'
 import {darken} from 'polished'
+`}<Span>span works</Span>{`
 import mastheadImage from './images/styled-components.png'
 import { Menu, Search} from 'styled-icons/feather'
 
@@ -21,8 +23,7 @@ const breakpoints = [576,768, 900]
 
 const theme = {
   breakpoints: [...breakpoints],
-  ${opening}space: [0, 4, 8, 16, 32, 64, 128, 256, 512],${closing}
-  lineHeights: {
+  space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
     solid: 1,
     title: 1.25,
     copy: 1.5
@@ -68,7 +69,7 @@ const theme = {
     short: 'all 0.3s ease-out',
     medium: 'all 0.6s ease-out',
     long: 'all 0.9s ease-out'
-  }
+  },
 }
 
 const defaults = {
@@ -153,4 +154,4 @@ const variants = {
 }
 
 const Gray = { ...theme, defaults, variants, images, icons }
-export { Gray }`
+export { Gray }`}</>

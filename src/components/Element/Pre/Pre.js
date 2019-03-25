@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { Span } from '../Span';
+import {codeAssignment1} from '../../../textDoc/textDoc'
 
 const StyledPre = styled.code`
 
@@ -11,16 +13,18 @@ white-space: pre;
 overflow-y:auto;
 overflow-x: auto;
 background-color:#ebebeb;
-width:100px;
 width: 45%;
 max-height: 95vh;
 `
 
 // ${props => props.theme.variants.button[props.variant || 'primary']};
 
-export const Pre = ({children, editable, ...props}) => (
+let myObject=<>{'Red{}'} <Span >{`apple`} </Span>eaten</>;
+
+
+export const Pre = ({children, editable, fromWhich, ...props}) => (
 <StyledPre contentEditable={editable}   {...props}>
-  {children}
+  {fromWhich === 0 ? <>{codeAssignment1}</> : children}
 </StyledPre>
 )
 
