@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Span } from '../Span';
-import {codeAssignment1} from '../../../textDoc/textDoc'
+
 
 const StyledPre = styled.code`
 
@@ -19,15 +18,17 @@ max-height: 95vh;
 
 // ${props => props.theme.variants.button[props.variant || 'primary']};
 
-let myObject=<>{'Red{}'} <Span >{`apple`} </Span>eaten</>;
+//let myObject=<>{'Red{}'} <Span >{`apple`} </Span>eaten</>;
+
+
 
 
 export const Pre = ({children, editable, fromWhich, ...props}) => (
-<StyledPre contentEditable={editable}   {...props}>
-  {fromWhich === 0 ? <>{codeAssignment1}</> : children}
+<StyledPre contentEditable={editable} onKeyUp={props.onChangeHandler}  {...props}>
+  {children}
 </StyledPre>
 )
-
+//{fromWhich === 0 ? <>{codeAssignment1}</> : children}
 Pre.defaultProps = {
     spellCheck: false
   }

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Span } from '../components/Element/Span';
 
-const opening = <span style={{color:"blue"}}>
-const closing = </span>
+//const opening = <span style={{color:"blue"}}>
+//const closing = </span>
 
 export const codeAssignment1 = <>{`import React from 'react'
 import {darken} from 'polished'
@@ -155,3 +155,5 @@ const variants = {
 
 const Gray = { ...theme, defaults, variants, images, icons }
 export { Gray }`}</>
+
+//export const codeAssignment1 = <>{theString.replace("}<Span>span works</Span>{", "`}<Span>span works</Span>{`")}</>
