@@ -44,7 +44,7 @@ export class FileInput extends Component {
         <StyledInput type='file'
                accept='.txt'
                onChange={e => {this.handleChosenFile(e.target.files[0])}}
-               style={{margin:'20px', marginLeft:'100px',  display:'block'}}
+               style={{marginTop:'25px'}}
         />
     </div>
     )

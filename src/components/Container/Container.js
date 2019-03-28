@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {IconButton, Pre, Section, Span, FileInput} from '../Element/'
 import { CompareArrows } from 'styled-icons/material'
+import { Paste } from 'styled-icons/fa-solid'
 import {codeAssignment1} from '../../textDoc/textDoc'
 
 
@@ -22,7 +23,7 @@ constructor(props) {
 }
 
 myFunc = () => {
-  alert("jj")
+  alert("Test alert")
 }
 
 updateString = (arg1) => {
@@ -31,6 +32,11 @@ updateString = (arg1) => {
   })
 }
 
+updateString1 = () => {
+  alert("Conditionally styled button alert")
+}
+
+
   render() {
     return (
       <div>
@@ -38,8 +44,17 @@ updateString = (arg1) => {
         <Pre variant="primary" editable={false} fromWhich={0} ><>{this.state.string1}</></Pre>
         <Pre variant="primary" editable={true} onChangeHandler={()=>this.myFunc()}></Pre>
     </Section>
-        <FileInput handleUpdatesString={(arg1)=>this.updateString(arg1)}/>
-        <IconButton variant="primary" icon={<CompareArrows />}  style={{margin:'20 auto',  display:'block'}}/> 
+    <Section flex justifyContent="left" m={1}>
+
+          <IconButton
+          handlePress={()=>this.updateString1()} 
+          variant="primary" icon={<Paste />} 
+          style={{marginTop: '20px', display:'inline-block'}}/>
+
+          <FileInput handleUpdatesString={(arg1)=>this.updateString(arg1)} style={{display:'inline-block'}}/>
+    
+    </Section>
+        <IconButton handlePress={(arg1)=>this.updateString1()} border variant="primary" icon={<CompareArrows />}  style={{margin:'20 auto',  display:'block'}}/> 
       </div>
     )
   }
