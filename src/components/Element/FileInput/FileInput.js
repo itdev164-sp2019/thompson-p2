@@ -6,6 +6,8 @@ const StyledInput = styled.input`
 color: blue;
 `
 
+
+
 export class FileInput extends Component {
 
 
@@ -53,6 +55,10 @@ export class FileInput extends Component {
     </div>
     )
   }
+}
+
+FileInput.propTypes = {
+  handleUpdatesString: PropTypes.func.isRequired
 }
 
 export default FileInput
