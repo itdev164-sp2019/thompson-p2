@@ -18,12 +18,12 @@ constructor(props) {
   this.state = {
      string1: codeAssignment1,
      string2: "",
-     originalString: toString(codeAssignment1)
+     originalString: ""
   }
 }
 
-myFunc = () => {
-  alert("Test alert")
+clearSpanFormating = () => {
+  //alert("Test alert")
 }
 
 updateString = (arg1) => {
@@ -42,7 +42,7 @@ updateString1 = () => {
       <div>
     <Section flex justifyContent="space-evenly" m={1}>
         <Pre variant="primary" editable={false} fromWhich={0} ><>{this.state.string1}</></Pre>
-        <Pre variant="primary" editable={true} onChangeHandler={()=>this.myFunc()}></Pre>
+        <Pre variant="primary" editable={true} onChangeHandler={()=>this.clearSpanFormating()}></Pre>
     </Section>
     <Section flex justifyContent="left" m={1}>
 
