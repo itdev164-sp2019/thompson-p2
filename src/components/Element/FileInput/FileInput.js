@@ -28,7 +28,7 @@ export class FileInput extends Component {
         read.readAsBinaryString(file);
         
         read.onloadend = () => {
-          this.props.handleUpdatesString(read.result);
+          this.props.handleUpdatesString(read.result.replace("[^\\]`", "\\`").replace("[^\\]$", "\\$"));
         }
 
     };

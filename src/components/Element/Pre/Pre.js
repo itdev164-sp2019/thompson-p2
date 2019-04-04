@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 
-const StyledPre = styled.code`
+const StyledPre = styled.p`
 
 padding: 8px;
 color: ${props => (props.variant === 'primary' ? 'black' : 'white')};
@@ -24,7 +24,7 @@ max-height: 95vh;
 
 
 export const Pre = ({children, editable, fromWhich, ...props}) => (
-<StyledPre contentEditable={editable} onKeyUp={props.onChangeHandler}  {...props}>
+<StyledPre contentEditable={editable} onKeyUp={(event) => props.onChangeHandler(event)}  {...props}>
   {children}
 </StyledPre>
 )
