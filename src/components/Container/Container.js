@@ -29,7 +29,7 @@ export class Container extends Component {
 
     
 
-    clearSpanFormating = () => {
+    clearSpanFormating = (event) => {
       let string1t = ""
 
       string1t = this.state.string1Holder
@@ -38,9 +38,10 @@ export class Container extends Component {
       this.setState({
         string1: parse(`${string1t}`),
         string1Holder: string1t,
-        //string2: this.thisText.text
+        string2: event.target.innerText
       })
 
+      //console.log(event.target.textContent)
 
     }
 
@@ -50,11 +51,18 @@ export class Container extends Component {
       let string1t = ""
 
       for(let i = 0; i < string1ToArray.length; i++){
-        if(string2ToArray.length < i || string2ToArray[i] !== string1ToArray[i]){
+
+        var stringA = string2ToArray[i]
+        var stringB = string1ToArray[i]
+
+        
+        
+
+        if(string2ToArray.length < i || stringA !== stringB){
           string1ToArray[i] = "<mark>"+string1ToArray[i]+"</mark>"
         }
 
-        string1t = string1t + string1ToArray[i] + (i< string1ToArray.length ? "\n" : "")
+        string1t = string1t + string1ToArray[i] + (i< string1ToArray.length-1 ? "\n" : "")
 
       }
 
@@ -83,8 +91,8 @@ export class Container extends Component {
         return (
           <div>
         <Section flex justifyContent="space-evenly" m={1}>
-            <Pre variant="primary" editable={false} fromWhich={0} ><>{this.state.string1}</></Pre>
-            <Pre ref={this.thisText} variant="primary" editable={true} onChangeHandler={this.clearSpanFormating}></Pre>
+            <Pre  variant="primary" editable={false} fromWhich={0} ><>{this.state.string1}</></Pre>
+            <Pre className="refrence" ref={this.thisText} variant="primary" editable={true} onChangeHandler={this.clearSpanFormating}></Pre>
         </Section>
         <Section flex justifyContent="left" m={1}>
 
