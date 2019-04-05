@@ -7,6 +7,7 @@ const StyledButton = styled(ButtonBase)`
     ${props => props.theme.variants.iconButton[props.variant || 'primary']};
     height: 60px;
     width: 200px;
+    ${props => props.theyMatch && !props.border}
 
     ${props => props.border ?
     `

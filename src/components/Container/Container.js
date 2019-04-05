@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {IconButton, Pre, Section, Span, FileInput} from '../Element/'
 import parse from 'html-react-parser';
-import { CompareArrows } from 'styled-icons/material'
+import { CompareArrows, ThumbUp } from 'styled-icons/material'
 import { Paste } from 'styled-icons/fa-solid'
 import {codeAssignment1} from '../../textDoc/textDoc'
 
@@ -20,7 +20,8 @@ export class Container extends Component {
         string1: parse(`${codeAssignment1.replace("[^\\]`", "\\`").replace("[^\\]$", "\\$")}`),
         string1Holder: codeAssignment1,
         string2: "",
-        originalString: ""
+        originalString: "",
+        theyMatch: false
       }
 
       this.thisText = React.createRef()
@@ -38,7 +39,8 @@ export class Container extends Component {
       this.setState({
         string1: parse(`${string1t}`),
         string1Holder: string1t,
-        string2: event.target.innerText
+        string2: event.target.innerText,
+        theyMatch: false
       })
 
       //console.log(event.target.textContent)
@@ -49,6 +51,7 @@ export class Container extends Component {
       let string1ToArray = this.state.string1Holder.split("\n");
       let string2ToArray = this.state.string2.split("\n");
       let string1t = ""
+      let theyMatchHolder = true
 
       for(let i = 0; i < string1ToArray.length; i++){
 
@@ -60,6 +63,7 @@ export class Container extends Component {
 
         if(string2ToArray.length < i || stringA !== stringB){
           string1ToArray[i] = "<mark>"+string1ToArray[i]+"</mark>"
+          theyMatchHolder = false
         }
 
         string1t = string1t + string1ToArray[i] + (i< string1ToArray.length-1 ? "\n" : "")
@@ -70,7 +74,8 @@ export class Container extends Component {
 
       this.setState({
         string1: parse(`${string1t}`),
-        string1Holder: string1t 
+        string1Holder: string1t,
+        theyMatch: theyMatchHolder
       })
 
     }
@@ -104,7 +109,7 @@ export class Container extends Component {
               <FileInput handleUpdatesString={(arg1)=>this.updateString(arg1)} style={{display:'inline-block'}}/>
         
         </Section>
-            <IconButton handlePress={this.setForamtting} border variant="primary" icon={<CompareArrows />}  style={{margin:'20 auto',  display:'block'}}/> 
+            <IconButton handlePress={this.setForamtting} border variant="primary" theymatch={this.state.theyMatch} icon={this.state.theyMatch ? <ThumbUp /> : <CompareArrows />}  style={{margin:'20 auto',  display:'block'}}/> 
           </div>
         )
       }
