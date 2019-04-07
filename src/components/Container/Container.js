@@ -59,37 +59,57 @@ export class Container extends Component {
     }
 
     setForamtting = ()=>{
+      // let string1ToArray = this.replaceCode(this.state.string1Holder.replace(/\n\n\n/g), "\n\n").split("\n");
+      // let string2ToArray = this.state.string2.replace(/\n\n\n/g, "\n\n").split("\n");
       let string1ToArray = this.replaceCode(this.state.string1Holder).split("\n");
       let string2ToArray = this.state.string2.split("\n");
       let string1t = ""
       let theyMatchHolder = true
 
-      for(let i = 0; i < string1ToArray.length; i++){
+      let string1ToArrayModified = string1ToArray.filter(v=>v!=='');
+      let string2ToArrayModified = string2ToArray.filter(v=>v!=='');
+
+      
+
+      for(let i = 0; i < string1ToArrayModified.length; i++){
 
 
-        if(string2ToArray.length-1 < i){
-          string1ToArray[i] = "<mark>"+string1ToArray[i]+"</mark>"
+        if(string2ToArrayModified.length-1 < i){
+          string1ToArrayModified[i] = "<mark>"+string1ToArrayModified[i]+"</mark>"
           theyMatchHolder = false
         }else{
 
-        var stringA = string2ToArray[i]
-        var stringB = this.returnCode(string1ToArray[i])
+        var stringA = string2ToArrayModified[i]
+        var stringB = this.returnCode(string1ToArrayModified[i])
 
         var stringA1 = stringA.replace(/\s/g, "").replace(/\t/g, "")
         var stringB1 = stringB.replace(/\s/g, "").replace(/\t/g, "")
         
 
-        if(string2ToArray.length < i || stringA1 !== stringB1){
-          string1ToArray[i] = "<mark>"+string1ToArray[i]+"</mark>"
+        if(string2ToArrayModified.length < i || stringA1 !== stringB1){
+          string1ToArrayModified[i] = "<mark>"+string1ToArrayModified[i]+"</mark>"
           theyMatchHolder = false
         }
       }
 
-        string1t = string1t + string1ToArray[i] + (i< string1ToArray.length-1 ? "\n" : "")
+        //string1t = string1t + string1ToArray[i] + (i< string1ToArrayModified.length-1 ? "\n" : "")
 
       }
 
 
+      for(let i = 0; i < string1ToArray.length; i++){
+
+        if(string1ToArray[i] === ""){
+          string1t = string1t + string1ToArray[i] + (i< string1ToArray.length-1 ? "\n" : "")
+          
+        }
+
+        for(let j = 0; j < string1ToArrayModified.length; j++){
+          if(string1ToArrayModified[j].replace(/(<mark>)/g, "").replace(/(<\/mark>)/g,"") === string1ToArray[i]){
+            string1t = string1t + string1ToArrayModified[j] + (j< string1ToArrayModified.length-1 ? "\n" : "")
+          }
+        }
+      }
 
       this.setState({
         string1: parse(`${string1t}`),
