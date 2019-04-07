@@ -54,13 +54,10 @@ export class Container extends Component {
         theyMatch: false
       })
 
-      //console.log(event.target.textContent)
-
     }
 
     setForamtting = ()=>{
-      // let string1ToArray = this.replaceCode(this.state.string1Holder.replace(/\n\n\n/g), "\n\n").split("\n");
-      // let string2ToArray = this.state.string2.replace(/\n\n\n/g, "\n\n").split("\n");
+      
       let string1ToArray = this.replaceCode(this.state.string1Holder).split("\n");
       let string2ToArray = this.state.string2.replace(new RegExp('\\[', 'g'), '\[').split("\n");
       let string1t = ""
@@ -91,8 +88,6 @@ export class Container extends Component {
           theyMatchHolder = false
         }
       }
-
-        //string1t = string1t + string1ToArray[i] + (i< string1ToArrayModified.length-1 ? "\n" : "")
 
       }
 
@@ -128,35 +123,23 @@ export class Container extends Component {
       this.setState( {
         string1: parse(`${this.replaceCode(arg1.replace(new RegExp('\\[', 'g'), '\[').replace(/(`)/g, "\`").replace(/(\$)/g, "\$").replace(/\t/g, "").replace(/  +/g, ' ').replace(/\r\n/g, "\n"))}`),
         string1Holder: arg1.replace(new RegExp('\\[', 'g'), '\[').replace(/(`)/g, "\`").replace(/(\$)/g, "\$").replace(/\t/g, "").replace(/  +/g, ' ').replace(/\r\n/g, "\n"),
-        //string1: this.replaceCode(arg1.replace("[^\\]`", "\\`").replace("[^\\]$", "\\$")),
-        //string1Holder: arg1.replace("[^\\]`", "\\`").replace("[^\\]$", "\\$"),
         string2: ""
       })
       console.log(this.state.string1)
     }
 
-    updateString1 = () => {
-      alert("Non-functional Conditionally styled button alert")
-    }
 
 
       render() {
         return (
           <div>
-        <Section flex justifyContent="space-evenly" m={1}>
-            <Pre  variant="primary" editable={false} fromWhich={0} ><>{this.state.string1}</></Pre>
-            <Pre  variant="primary" editable={true} onChangeHandler={this.clearSpanFormating}></Pre>
-        </Section>
-        <Section flex justifyContent="left" m={1}>
-{/* 
-              <IconButton
-              handlePress={()=>this.updateString1()} 
-              variant="primary" icon={<Paste />} 
-              style={{marginTop: '20px', display:'inline-block'}}/> */}
+            <Section flex justifyContent="space-evenly" m={1}>
+                <Pre  variant="primary" editable={false} fromWhich={0} onChangeHandler={null}><>{this.state.string1}</></Pre>
+                <Pre  variant="primary" editable={true} onChangeHandler={this.clearSpanFormating}></Pre>
+            </Section>
 
-              <FileInput handleUpdatesString={(arg1)=>this.updateString(arg1)} style={{display:'inline-block'}} icon={<Paste />}/>
-        
-        </Section>
+            <FileInput handleUpdatesString={(arg1)=>this.updateString(arg1)}/>
+          
             <IconButton handlePress={this.setForamtting} border variant="primary" theymatch={this.state.theyMatch} icon={this.state.theyMatch ? <ThumbUp /> : <CompareArrows />}  style={{margin:'20 auto',  display:'block'}}/> 
           </div>
         )

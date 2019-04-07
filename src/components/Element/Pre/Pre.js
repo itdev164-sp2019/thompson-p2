@@ -16,10 +16,6 @@ width: 45%;
 max-height: 66vh;
 `
 
-// ${props => props.theme.variants.button[props.variant || 'primary']};
-
-//let myObject=<>{'Red{}'} <Span >{`apple`} </Span>eaten</>;
-
 
 
 
@@ -28,7 +24,7 @@ export const Pre = ({children, editable, fromWhich, ...props}) => (
   {children}
 </StyledPre>
 )
-//{fromWhich === 0 ? <>{codeAssignment1}</> : children}
+
 Pre.defaultProps = {
     spellCheck: false
   }

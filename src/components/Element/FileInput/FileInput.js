@@ -41,17 +41,11 @@ export class FileInput extends Component {
     };
 
 
-
-
-
-
-
-
-  render() {
+  render(icon, ...prpos) {
     return (
     <div>
-        <StyledLable for="file-input" aria-hidden="true">
-          <i>{<Paste style={{height: "40px"}}/>}</i>
+        <StyledLable htmlFor="file-input" aria-hidden="true">
+          <i>{<Paste style={{height: "50px"}}/>}</i>
         </StyledLable>
         <StyledInput 
                 id="file-input"
@@ -69,8 +63,9 @@ export class FileInput extends Component {
   }
 }
 
+
 FileInput.propTypes = {
-  handleUpdatesString: PropTypes.func.isRequired
+  handleUpdatesString: PropTypes.func
 }
 
 export default FileInput
