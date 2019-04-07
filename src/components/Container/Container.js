@@ -29,7 +29,7 @@ export class Container extends Component {
 
     replaceCode = (arg1) => {
 
-      return arg1.replace("[^\\]`", "\\`").replace("[^\\]$", "\\$").replace(/</g,"&lt").replace(/>/g,"&gt")
+      return arg1.replace(new RegExp('\\[', 'g'), '\[').replace("[^\\]`", "\\`").replace("[^\\]$", "\\$").replace(/</g,"&lt").replace(/>/g,"&gt")
     }
 
     returnCode = (arg1) => {
@@ -62,7 +62,7 @@ export class Container extends Component {
       // let string1ToArray = this.replaceCode(this.state.string1Holder.replace(/\n\n\n/g), "\n\n").split("\n");
       // let string2ToArray = this.state.string2.replace(/\n\n\n/g, "\n\n").split("\n");
       let string1ToArray = this.replaceCode(this.state.string1Holder).split("\n");
-      let string2ToArray = this.state.string2.split("\n");
+      let string2ToArray = this.state.string2.replace(new RegExp('\\[', 'g'), '\[').split("\n");
       let string1t = ""
       let theyMatchHolder = true
 
@@ -97,18 +97,23 @@ export class Container extends Component {
       }
 
 
-      for(let i = 0; i < string1ToArray.length; i++){
+      for(let j = 0; j < string1ToArray.length; j++){
 
-        if(string1ToArray[i] === ""){
-          string1t = string1t + string1ToArray[i] + (i< string1ToArray.length-1 ? "\n" : "")
-          continue;
-        }
 
-        for(let j = 0; j < string1ToArrayModified.length; j++){
-          if(string1ToArrayModified[j].replace(/(<mark>)/g, "").replace(/(<\/mark>)/g,"") === string1ToArray[i]){
-            string1t = string1t + string1ToArrayModified[j] + (j< string1ToArrayModified.length-1 ? "\n" : "")
+        
+        if(string1ToArray[j] === ""){
+          string1t = string1t + (j < string1ToArray.length-1 ? "\n" : "")
+        }else{
+
+        for(let k = 0; k < string1ToArrayModified.length; k++){
+          if(string1ToArrayModified[k].replace(/(<mark>)/g, "").replace(/(<\/mark>)/g,"") === string1ToArray[j]){
+            string1t = string1t + string1ToArrayModified[k] + (k < string1ToArrayModified.length-1 ? "\n" : "")
+            string1ToArrayModified[k] = ""
+            break;
           }
         }
+      }
+      
       }
 
       this.setState({
@@ -121,10 +126,13 @@ export class Container extends Component {
 
     updateString = (arg1) => {
       this.setState( {
-        string1: this.replaceCode(arg1.replace("[^\\]`", "\\`").replace("[^\\]$", "\\$")),
-        string1Holder: arg1.replace("[^\\]`", "\\`").replace("[^\\]$", "\\$"),
+        string1: parse(`${this.replaceCode(arg1.replace(new RegExp('\\[', 'g'), '\[').replace(/(`)/g, "\`").replace(/(\$)/g, "\$").replace(/\t/g, "").replace(/  +/g, ' ').replace(/\r\n/g, "\n"))}`),
+        string1Holder: arg1.replace(new RegExp('\\[', 'g'), '\[').replace(/(`)/g, "\`").replace(/(\$)/g, "\$").replace(/\t/g, "").replace(/  +/g, ' ').replace(/\r\n/g, "\n"),
+        //string1: this.replaceCode(arg1.replace("[^\\]`", "\\`").replace("[^\\]$", "\\$")),
+        //string1Holder: arg1.replace("[^\\]`", "\\`").replace("[^\\]$", "\\$"),
         string2: ""
       })
+      console.log(this.state.string1)
     }
 
     updateString1 = () => {
@@ -136,17 +144,17 @@ export class Container extends Component {
         return (
           <div>
         <Section flex justifyContent="space-evenly" m={1}>
-            <Pre  variant="primary" editable={false} fromWhich={0} onChangeHandler={null}><>{this.state.string1}</></Pre>
+            <Pre  variant="primary" editable={false} fromWhich={0} ><>{this.state.string1}</></Pre>
             <Pre  variant="primary" editable={true} onChangeHandler={this.clearSpanFormating}></Pre>
         </Section>
         <Section flex justifyContent="left" m={1}>
-
+{/* 
               <IconButton
               handlePress={()=>this.updateString1()} 
               variant="primary" icon={<Paste />} 
-              style={{marginTop: '20px', display:'inline-block'}}/>
+              style={{marginTop: '20px', display:'inline-block'}}/> */}
 
-              {/* <FileInput handleUpdatesString={(arg1)=>this.updateString(arg1)} style={{display:'inline-block'}}/> */}
+              <FileInput handleUpdatesString={(arg1)=>this.updateString(arg1)} style={{display:'inline-block'}} icon={<Paste />}/>
         
         </Section>
             <IconButton handlePress={this.setForamtting} border variant="primary" theymatch={this.state.theyMatch} icon={this.state.theyMatch ? <ThumbUp /> : <CompareArrows />}  style={{margin:'20 auto',  display:'block'}}/> 

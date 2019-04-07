@@ -1,11 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { Paste } from 'styled-icons/fa-solid'
 
 const StyledInput = styled.input`
 color: blue;
+cursor:pointer;
+display: none;
 `
-
+const StyledLable = styled.label`
+margin-left: 100px;
+&:hover {
+ color: #207265;}
+`
 
 
 export class FileInput extends Component {
@@ -28,7 +35,7 @@ export class FileInput extends Component {
         read.readAsBinaryString(file);
         
         read.onloadend = () => {
-          this.props.handleUpdatesString(read.result.replace("[^\\]`", "\\`").replace("[^\\]$", "\\$"));
+          this.props.handleUpdatesString(read.result);
         }
 
     };
@@ -43,14 +50,19 @@ export class FileInput extends Component {
   render() {
     return (
     <div>
-        <StyledInput type='file'
-               accept='.js'
+        <StyledLable for="file-input" aria-hidden="true">
+          <i>{<Paste style={{height: "40px"}}/>}</i>
+        </StyledLable>
+        <StyledInput 
+                id="file-input"
+                type='file'
+               accept='.js,.txt'
                onChange={e => {
                  if(e.target.files[0] != null){
                  this.handleChosenFile(e.target.files[0])
                  }
                 }}
-               style={{marginTop:'25px'}}
+               style={{marginTop:'25px' }}
         />
     </div>
     )
