@@ -50,7 +50,7 @@ export class FileInput extends Component {
         <StyledInput 
                 id="file-input"
                 type='file'
-               accept='.js,.txt'
+               accept='.js,.txt,.html'
                onChange={e => {
                  if(e.target.files[0] != null){
                  this.handleChosenFile(e.target.files[0])
