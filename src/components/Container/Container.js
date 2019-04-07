@@ -101,7 +101,7 @@ export class Container extends Component {
 
         if(string1ToArray[i] === ""){
           string1t = string1t + string1ToArray[i] + (i< string1ToArray.length-1 ? "\n" : "")
-          
+          continue;
         }
 
         for(let j = 0; j < string1ToArrayModified.length; j++){
@@ -121,7 +121,7 @@ export class Container extends Component {
 
     updateString = (arg1) => {
       this.setState( {
-        string1: arg1.replace("[^\\]`", "\\`").replace("[^\\]$", "\\$"),
+        string1: this.replaceCode(arg1.replace("[^\\]`", "\\`").replace("[^\\]$", "\\$")),
         string1Holder: arg1.replace("[^\\]`", "\\`").replace("[^\\]$", "\\$"),
         string2: ""
       })
@@ -146,7 +146,7 @@ export class Container extends Component {
               variant="primary" icon={<Paste />} 
               style={{marginTop: '20px', display:'inline-block'}}/>
 
-              <FileInput handleUpdatesString={(arg1)=>this.updateString(arg1)} style={{display:'inline-block'}}/>
+              {/* <FileInput handleUpdatesString={(arg1)=>this.updateString(arg1)} style={{display:'inline-block'}}/> */}
         
         </Section>
             <IconButton handlePress={this.setForamtting} border variant="primary" theymatch={this.state.theyMatch} icon={this.state.theyMatch ? <ThumbUp /> : <CompareArrows />}  style={{margin:'20 auto',  display:'block'}}/> 
